@@ -1,6 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+def index(request):
+    return render(request, "base.html")
+
+
+
+
+
+'''
 # Create your views here.
-def hello(request):
-    return HttpResponse('<H3>It is  page: app1</H3>')
+def index1(request):
+    return HttpResponse('<H3>Hello, world!</H3>')
+'''
