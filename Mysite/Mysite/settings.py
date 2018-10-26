@@ -81,8 +81,8 @@ DATABASES = {
         'NAME':'django_learns',
         'USER':'alex',
         'PASSWORD':'aln1409',
-        'HOST':'',
-        'PORT':'',
+        'HOST':'127.0.0.7',
+        'PORT':'5432',
         
     }
 }
