@@ -1,8 +1,13 @@
 from django.urls import path
-from app1.views import index, empt_page,contact
+from app1 import views
+
 
 urlpatterns = [
-    path('', index),
-    path('app1/', empt_page),
-    path('contact/', contact),
+    path('',views.index),
+    path('signup', views.signup),
+    path('signin', views.signin),
+    path('myaccount', views.myaccount),
+    path('ssign', views.sucsignup),
+
+    
 ]

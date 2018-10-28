@@ -1,0 +1,41 @@
+{% extends "app1/wrapper.html" %}
+    {% block pageTitle%}
+    Поздравляем
+    {% endblock %}
+
+    {% block navbar-right %}
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.user}} <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/admin">Панель администратора</a></li>
+          <li><a href="#">...</a></li>
+          <li><a href="#">...</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#signout">Sign out</a></li>
+          
+        </ul>
+      </li>
+    {% endblock %}
+  
+
+    {% block content %}
+
+<h1>Поздравляем</h1>
+ <p class="lead">
+    С успешной регистрацией {{request.user}}
+     <br>
+     
+    ..............
+    <br>
+    <a href="/myaccount">Продолжить</a>
+    <br>
+    ................
+    
+</p>
+
+
+
+
+{% endblock %}
+
+    

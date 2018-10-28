@@ -1,0 +1,40 @@
+{% extends "app1/wrapper.html" %}
+
+{% block pageTitle%}
+    Sign up
+{% endblock %}
+
+
+{% block link%}
+  <link href="static/css/signin.css" rel="stylesheet">
+  <script src="static/js/ie-emulation-modes-warning.js"></script>
+{% endblock %}
+
+{% block navbar-right %}
+
+              <li><a href="/signin">Login</a></li>
+{% endblock %}
+
+
+{% block content %}
+  
+
+    <div class="container-fluide">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Sign up to ...</h2>
+
+        <label for="inputUserName" class="sr-only">User name</label>
+        <input type="userName" id="inputUserName" class="form-control" placeholder="User name" required autofocus>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+        <label for="inputPassword" class="sr-only">Confirm password</label>
+        <input type="password" id="inputConfPassword" class="form-control" placeholder="Confirm password" required>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create an account</button>
+      </form>
+
+    </div> <!-- /container -->
+{% endblock %}

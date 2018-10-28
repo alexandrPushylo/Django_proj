@@ -1,8 +1,29 @@
 {% extends "app1/wrapper.html" %}
 
-{% block content %}
-<p>Проверка работоспособности!</p>
+{% block pageTitle%}
+    Home Page
+{% endblock %}
 
-{% include "app1/includes/some_html.html" %}
+
+{% block navbar-right %}
+              <li><a href="/signup">Sign up</a></li>
+              <li><a href="/signin">Login</a></li>
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Home page</h1>
+ <p class="lead">
+    ...........
+     <br>
+    ..............
+    <br>
+    ................
+</p>
+
+
+
+
 {% endblock %}
 
