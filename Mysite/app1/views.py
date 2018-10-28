@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #from django.contrib.admin import models
 from django.contrib.auth.models import User
-#from django.http import HttpResponse
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout
 
 def index(request):
     return render(request, "app1/homePage.html")
@@ -12,16 +15,34 @@ def signup(request):
 def signin(request):
         return render(request,"app1/signin.html")
 
+def sucsignup(request):
+        return render(request,"app1/ssign.html")
+
+@login_required
 def myaccount(request):
       
        # uname=models.User.objects.get(username=USER)
         uname=request.user
-        fname=request
         
-        return render(request,"app1/myaccount.html",{'UserName':uname,'fname':fname})
+        
+        return render(request,"app1/myaccount.html",{'UserName':uname})
 
-def sucsignup(request):
-        return render(request,"app1/ssign.html")
+def reg_user(request):
+    if request.method=="POST":
+        reg_form = UserCreationForm(request.POST)
+        if reg_form.is_valid():
+                reg_form.save()
+                return HttpResponse("app1/homePage.html")
+    else: 
+        reg_form = UserCreationForm()
+    return render(request,'app1/signup.html',{'reg_form':reg_form})
+        
+
+def user_logout(request):
+        logout(request)
+        return redirect('/')
+
+
 
 
 

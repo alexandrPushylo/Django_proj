@@ -21,6 +21,15 @@
     <br>
     ................
 </p>
+{% if user.authentificated %}
+
+<p>hello {{ user.username }}</p>
+
+{% else %}
+
+<p>hello anon {{ user.username }}</p>
+
+{%endif%}
 
 
 
