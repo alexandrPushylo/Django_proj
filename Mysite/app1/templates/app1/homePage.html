@@ -5,10 +5,12 @@
 {% endblock %}
 
 
-{% block navbar-right %}
-              <li><a href="/signup">Sign up</a></li>
-              <li><a href="/signin">Login</a></li>
-{% endblock %}
+
+
+
+
+
+
 
 
 {% block content %}
@@ -21,13 +23,13 @@
     <br>
     ................
 </p>
-{% if user.authentificated %}
+{% if request.user.is_authenticated %}
 
-<p>hello {{ user.username }}</p>
+<p>hello {{ request.user }}</p>
 
 {% else %}
 
-<p>hello anon {{ user.username }}</p>
+<p>hello anon </p>
 
 {%endif%}
 

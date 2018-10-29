@@ -6,7 +6,7 @@
 
 
 {% block link%}
-  <link href="static/css/signin.css" rel="stylesheet">
+  <link href="/static/css/signin.css" rel="stylesheet">
   <script src="static/js/ie-emulation-modes-warning.js"></script>
 {% endblock %}
 
@@ -18,12 +18,26 @@
 
 {% block content %}
   
-  <form action="" method="POST">
-    {{reg_form.as_p}}
-    {% csrf_token %}
-    <input type="submit" value="Отправить">
-  </form>
+  
+  
+  <div class="container-fluide">
 
+    <form class="form-signin" action="" method="POST">
+      <h2 class="form-signin-heading">Sign up to ...</h2>
+
+      <label for="id_username" class="sr-only">User name</label>
+      <input type="text" name="username" maxlength="150" class="form-control" placeholder="User name" autofocus required id="id_username">
+
+      <label for="id_password1" class="sr-only">Password</label>
+      <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Password" required>
+
+      <label for="id_password2" class="sr-only">Confirm password</label>
+      <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm password" required>
+      {% csrf_token %}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Create an account</button>
+    </form>
+
+  </div> <!-- /container -->
     
     
 {% endblock %}

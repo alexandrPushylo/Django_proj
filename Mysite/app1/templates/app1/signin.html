@@ -6,7 +6,7 @@
 
 
 {% block link%}
-  <link href="static/css/signin.css" rel="stylesheet">
+  <link href="/static/css/signin.css" rel="stylesheet">
   <script src="static/js/ie-emulation-modes-warning.js"></script>
 {% endblock %}
 
@@ -21,21 +21,22 @@
 
     <div class="container-fluide">
 
-            <form class="form-signin">
+            <form class="form-signin" action="/user_au/" method="POST" id="login-form">
+             
                     <h2 class="form-signin-heading">Please sign in</h2>
             
-                    <label for="inputUserName" class="sr-only">User name</label>
-                    <input type="userName" id="inputUserName" class="form-control" placeholder="User name" required autofocus>
+                    <label for="id_username" class="sr-only">User name</label>
+                    <input type="text" name="username" id="id_username" class="form-control" placeholder="User name" required autofocus>
                     
                     <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                    
+                    <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+                    <input type="hidden" name="next" value="/admin/">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember-me" disabled> Remember me
                       </label>
                     </div>
-                    
+                    {% csrf_token %}
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                   </form>
 
