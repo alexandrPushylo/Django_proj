@@ -13,15 +13,26 @@
     ...........
      <br>
      {{UserName}}
+     <br><br><br><br><br><br>
+     {{user_id}}
     
     <br>
     
     {{fname}}
 </p>
+<br><br><br>
 
 
+  <form method="post" action="" >
 
+{{form.as_p}}
+    	{% csrf_token %}
 
+	<input type="submit" value="войти">
+
+  </form>
 {% endblock %}
+
+
 
     

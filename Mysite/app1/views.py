@@ -1,81 +1,74 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, render_to_response#
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm#
 from django.contrib.auth import logout, authenticate, login
-from django.http.response import HttpResponse
 
-def index(request):
-    return render(request, "app1/homePage.html")
+from django.views.generic.edit import FormView
+from django.views.generic.base import View
+from django.views.generic import ListView
 
-def signup(request):
-        return render(request,"app1/signup.html")
+from django.contrib.auth.models import User
 
+from app1.models import Person
+from app1.locator import convert_adres, haversine
+from app1.forms import LocForm
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
-def sucsignup(request):
-        return render(request,"app1/ssign.html")
-
-@login_required(login_url='/signin/')
-def myaccount(request):
-        uname=request.user
-        
-        return render(request,"app1/myaccount.html",{'UserName':uname})
+from django.shortcuts import render, redirect
 
 
-def reg_user(request):
-    if request.method == "POST":
-        reg_form = UserCreationForm(request.POST)
-        if reg_form.is_valid():
-            reg_form.save()
-            return redirect('/')
-    else: 
-        reg_form = UserCreationForm()
-
-    return render(request,'app1/signup.html',{'reg_form':reg_form})
-        
 
 
-def user_logout(request):
-        logout(request)
-        return redirect('/')
 
-def user_au(request):
-        render(request,"app1/signin.html")
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-                if user.is_active:
-                        login(request, user)
-                        return redirect('/myaccount')
-                else:
-                        return HttpResponse('<H3>Учетная запись отключена</H3>')
+class LogoutView(View):
+        def get(self, request):
+                logout(request)
+                return HttpResponseRedirect('/')
+                pass
+
+class UserRegistrationForm(FormView):
+        form_class = UserCreationForm
+        template_name = 'app1/signup.html'
+        success_url = '/'
+        def form_valid(self, form):
+                form.save()
+                return super(UserRegistrationForm, self).form_valid(form)
+                pass
+
+class LoginFormView(FormView):
+        form_class = AuthenticationForm
+        template_name = 'app1/signin.html'
+        success_url = '/'
+
+        def form_valid(self, form):
+                self.user = form.get_user()
+                login(self.request, self.user)
+                return super(LoginFormView, self).form_valid(form)
+                pass
+
+method_decorator(login_required)
+def UserProfile(request, id):
+        user = get_object_or_404(User, id=id)
+
+        if request.method == 'POST':
+                form = LocForm(request.POST)
+                if form.is_valid():
+                        full_location = '{},{},{},{}'.format(form.cleaned_data['country'], 
+                                                        form.cleaned_data['city'],
+                                                        form.cleaned_data['street'],
+                                                        form.cleaned_data['building'])
+                        point_coords = convert_adres(full_location)
+                        home_coords = '{},{},{},{}'.format(user.person.home_country,
+                                                        user.person.home_city,
+                                                        user.person.home_street,
+                                                        user.person.home_building,)
+                        home = convert_adres(home_coords)
+                        dlina = haversine(float(home['latitude']), float(home['longitude']), point_coords['latitude'], point_coords['longitude'])
+                        return HttpResponseRedirect("/accounts/{}".format(id))
         else:
-                return HttpResponse('<H3>Неверный логин или пороль</H3>')
-        
+                form = LocForm()
+                return render(request, 'app1/myaccount.html',{'form':form})
+                pass
 
-
-
-def signin(request):
-        return render(request,"app1/signin.html")
-        
-
-
-
-
-
-
-
-
-
-def contact(request):
-    return render(request,"app1/basic.html",{'values':[
-        'Усли у вас остались вопросы, то задавайте их по телефону',
-        '(025) 948-43-09',
-        'aln@mail.com'
-        ]})
-
-'''
-def empt_page(request):# empty page for "app1"
-    return HttpResponse('<H3>It is page "app1"</H3>')
-    '''
