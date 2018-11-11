@@ -1,0 +1,8 @@
+geo
+75ea451a-e617-4216-b661-3e0a01cc8bdc
+
+e26897a3-3609-4b54-966b-cd72210cc302
+
+https://geocode-maps.yandex.ru/1.x/?apikey=75ea451a-e617-4216-b661-3e0a01cc8bdc&format=json&geocode={}&results=1
+
+https://api.routing.yandex.net/v1.0.0/distancematrix?origins=55.7538127,37.5755189|55.7539127,37.5655189&destinations=55.7489841,37.564189&mode=transit&apikey=e26897a3-3609-4b54-966b-cd72210cc302

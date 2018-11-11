@@ -12,25 +12,29 @@
  <p class="lead">
     ...........
      <br>
-     {{UserName}}
-     <br><br><br><br><br><br>
-     {{user_id}}
-    
-    <br>
-    
-    {{fname}}
-</p>
-<br><br><br>
+  {% if request.method == 'POST' %}
+    <p>Адрес цели:  {{FL}}</p> 
+    <p>Координаты цели:  {{PC}}</p> 
+    <p>Адрес дома:  {{HC}}</p> 
+    <p>Координаны дома:  {{H}}</p> 
+    <p>Растояние от цели до дома:  {{DL}} км.</p> 
 
+  {% else %}
 
   <form method="post" action="" >
-
-{{form.as_p}}
-    	{% csrf_token %}
-
-	<input type="submit" value="войти">
-
+    <div class = "form-group">
+        <div class="form-group" >{{form.country}}<p class="help-block">Страна</p></div>
+        <div class="form-group">{{form.city}}<p class="help-block">Город</p></div>
+        <div class="form-group">{{form.street}}<p class="help-block">Улица</p></div>
+        <div class="form-group">{{form.building}}<p class="help-block">Дом</p></div>
+        {% csrf_token %}
+        <input type="submit" value="Отправить">
+    </div>
   </form>
+     
+  {% endif %}
+
+ 
 {% endblock %}
 
 

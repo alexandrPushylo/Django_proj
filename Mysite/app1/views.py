@@ -48,27 +48,39 @@ class LoginFormView(FormView):
                 return super(LoginFormView, self).form_valid(form)
                 pass
 
+
 method_decorator(login_required)
 def UserProfile(request, id):
-        user = get_object_or_404(User, id=id)
+    user = get_object_or_404(User, id=id)
+    
+    if request.method == 'POST':
+        form =  LocForm(request.POST)
+        if form.is_valid():
+            
+            full_location = '{},{},{},{}'.format(form.cleaned_data['country'], 
+                                        form.cleaned_data['city'], 
+                                        form.cleaned_data['street'], 
+                                        form.cleaned_data['building'])
+            
+            point_coords = convert_adres(full_location)
 
-        if request.method == 'POST':
-                form = LocForm(request.POST)
-                if form.is_valid():
-                        full_location = '{},{},{},{}'.format(form.cleaned_data['country'], 
-                                                        form.cleaned_data['city'],
-                                                        form.cleaned_data['street'],
-                                                        form.cleaned_data['building'])
-                        point_coords = convert_adres(full_location)
-                        home_coords = '{},{},{},{}'.format(user.person.home_country,
-                                                        user.person.home_city,
-                                                        user.person.home_street,
-                                                        user.person.home_building,)
-                        home = convert_adres(home_coords)
-                        dlina = haversine(float(home['latitude']), float(home['longitude']), point_coords['latitude'], point_coords['longitude'])
-                        return HttpResponseRedirect("/accounts/{}".format(id))
-        else:
-                form = LocForm()
-                return render(request, 'app1/myaccount.html',{'form':form})
-                pass
+            home_coords = '{},{},{},{}'.format(user.person.home_country,
+                                                user.person.home_city,
+                                                user.person.home_street,
+                                                user.person.home_building,)
+            
+            home = convert_adres(home_coords)
+
+
+            dlina = haversine(float(home['latitude']), float(home['longitude']), point_coords['latitude'], point_coords['longitude'])
+            
+         #   return HttpResponseRedirect("/accounts/{}".format(id))
+            return render(request, 'app1/myaccount.html', { 'FL': full_location,'PC':point_coords,'HC':home_coords,'H':home,'DL':dlina})
+    else:
+
+        form = LocForm()
+        
+        return render(request, 'app1/myaccount.html', { 'form': form})
+        pass
+
 

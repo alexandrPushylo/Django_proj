@@ -3,7 +3,8 @@ import json
 import re
 from math import radians, cos, sin, asin, sqrt
 
-req_to_yandex_api = 'https://geocodeyandex.ru-maps./1.x/?format=json&geocode={}&results=1'
+#req_to_yandex_api = 'https://geocodeyandex.ru-maps./1.x/?format=json&geocode={}&results=1'
+req_to_yandex_api = 'https://geocode-maps.yandex.ru/1.x/?apikey=75ea451a-e617-4216-b661-3e0a01cc8bdc&format=json&geocode={}&results=1'
 
 def convert_adres(adres):
     clear_adres = re.sub(r'\([^()]*\)', '', adres)
@@ -19,7 +20,7 @@ def convert_adres(adres):
 
         return result
     else:
-        return conect_error_message(request.status_code)
+        return conect_error_message.format(request.status_code)
     pass
 
 def haversine(lat1, lon1,  lat2, lon2):

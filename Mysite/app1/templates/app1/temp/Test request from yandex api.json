@@ -1,0 +1,81 @@
+{
+    "response": {
+        "GeoObjectCollection": {
+            "metaDataProperty": {
+                "GeocoderResponseMetaData": {
+                    "request": "{}",
+                    "found": "4",
+                    "results": "1"
+                }
+            },
+            "featureMember": [
+                {
+                    "GeoObject": {
+                        "metaDataProperty": {
+                            "GeocoderMetaData": {
+                                "kind": "hydro",
+                                "text": "Россия, Красноярский край, Таймырский Долгано-Ненецкий район, озеро Фигурные",
+                                "precision": "other",
+                                "Address": {
+                                    "country_code": "RU",
+                                    "formatted": "Красноярский край, Таймырский Долгано-Ненецкий район, озеро Фигурные",
+                                    "Components": [
+                                        {
+                                            "kind": "country",
+                                            "name": "Россия"
+                                        },
+                                        {
+                                            "kind": "province",
+                                            "name": "Сибирский федеральный округ"
+                                        },
+                                        {
+                                            "kind": "province",
+                                            "name": "Красноярский край"
+                                        },
+                                        {
+                                            "kind": "area",
+                                            "name": "Таймырский Долгано-Ненецкий район"
+                                        },
+                                        {
+                                            "kind": "hydro",
+                                            "name": "озеро Фигурные"
+                                        }
+                                    ]
+                                },
+                                "AddressDetails": {
+                                    "Country": {
+                                        "AddressLine": "Красноярский край, Таймырский Долгано-Ненецкий район, озеро Фигурные",
+                                        "CountryNameCode": "RU",
+                                        "CountryName": "Россия",
+                                        "AdministrativeArea": {
+                                            "AdministrativeAreaName": "Красноярский край",
+                                            "SubAdministrativeArea": {
+                                                "SubAdministrativeAreaName": "Таймырский Долгано-Ненецкий район",
+                                                "Locality": {
+                                                    "Premise": {
+                                                        "PremiseName": "озеро Фигурные"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Таймырский Долгано-Ненецкий район, Красноярский край, Россия",
+                        "name": "озеро Фигурные",
+                        "boundedBy": {
+                            "Envelope": {
+                                "lowerCorner": "84.93474 69.81081",
+                                "upperCorner": "84.952697 69.824653"
+                            }
+                        },
+                        "Point": {
+                            "pos": "84.940786 69.817595"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
