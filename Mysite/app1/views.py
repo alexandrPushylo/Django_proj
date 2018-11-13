@@ -20,6 +20,12 @@ from django.shortcuts import render, redirect
 
 
 
+def homePageView(request):
+        if request.user.is_authenticated:
+                Us=User.objects.get(id=request.user.id)
+                return render(request,'app1/homePage.html',{'user_first_name':Us.first_name})
+        return render(request,'app1/homePage.html')
+
 
 
 class LogoutView(View):
